@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 let colorIndex = 0;
 
@@ -30,9 +32,7 @@ const parseSaveTime = (saveTime) => {
   const minute = saveTime.substring(10, 12);
   const second = saveTime.substring(12, 14);
 
-  // Create a new Date object with the extracted components
   const parsedDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
-
   return parsedDate;
 };
 
@@ -48,13 +48,15 @@ const useChartData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/production-data/recent');
+        const response = await axios.get('http://localhost:3001/api/production-data/');
         const productionData = response.data.map(data => ({
           ...data,
           SaveTime: formatSaveTime(parseSaveTime(data.SaveTime))
         }));
 
-        const groupedData = productionData.reduce((acc, cur) => {
+        const reversedData = productionData.reverse();
+
+        const groupedData = reversedData.reduce((acc, cur) => {
           if (!acc[cur.LineCode]) {
             acc[cur.LineCode] = {
               labels: [],

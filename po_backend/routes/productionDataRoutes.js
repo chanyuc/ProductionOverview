@@ -8,7 +8,7 @@ router.get('/production-data', async (req, res) => {
             order: [
                 ['SaveTime', 'DESC']
             ],
-            limit: 1000
+            limit: 1001
         });
         res.json(productionData);
     } catch (error) {
