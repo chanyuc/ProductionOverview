@@ -9,10 +9,14 @@ const parseSaveTime = (saveTime) => {
     const minute = saveTime.substring(10, 12);
     const second = saveTime.substring(12, 14);
 
-    // Create a new Date object with the extracted components
     const parsedDate = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
-
     return parsedDate;
+};
+
+const formatSaveTime = (saveTime) => {
+  const hours = saveTime.getHours().toString().padStart(2, '0');
+  const minutes = saveTime.getMinutes().toString().padStart(2, '0');
+  return `${hours}:${minutes}`;
 };
 
 const ProductionDataComponent = () => {
@@ -26,7 +30,7 @@ const ProductionDataComponent = () => {
             ...data,
             SaveTime: parseSaveTime(data.SaveTime)
         }));
-        setProductionData(response.data);
+        setProductionData(parsedData);
       } catch (error) {
         console.error('Error fetching production data:', error);
       }
@@ -51,7 +55,7 @@ const ProductionDataComponent = () => {
         <tbody>
           {productionData.map((data) => (
             <tr key={data.id}>
-              <td>{data.SaveTime}</td>
+              <td>{formatSaveTime(data.SaveTime)}</td>
               <td>{data.LineCode}</td>
               <td>{data.GAP}</td>
               <td>{data.PEND}</td>

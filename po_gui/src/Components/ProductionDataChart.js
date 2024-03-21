@@ -11,10 +11,19 @@ const ProductionDataChart = () => {
     return <div>Loading...</div>; 
   }
 
+  const options = {
+    scales: {
+      y: {
+        min: -100,
+        max: 100
+      }
+    }
+  };
+
   return (
     <div>
       <h2>Production Data Chart</h2>
-      <Line data={chartData} />
+      <Line data={chartData} options={options} />
     </div>
   );
 };

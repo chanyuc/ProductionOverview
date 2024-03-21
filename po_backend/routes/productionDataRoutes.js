@@ -2,18 +2,9 @@ const express = require('express');
 const router = express.Router();
 const ProductionData = require('../models/ProductionData');
 
-// const { Op } = require('sequelize');
-// const currentDate = new Date();
-// const oneHourAgo = new Date(currentDate.getTime() - (1 * 60 * 60 * 1000));
-
 router.get('/production-data', async (req, res) => {
     try {
         const productionData = await ProductionData.findAll({
-            // where: {
-            //     SaveTime: {
-            //         [Op.gt]: oneHourAgo,
-            //     }
-            // },
             order: [
                 ['SaveTime', 'DESC']
             ],
@@ -32,7 +23,7 @@ router.get('/production-data/recent', async (req, res) => {
             order: [
                 ['SaveTime', 'DESC']
             ],
-            limit: 100
+            limit: 98
         });
         res.json(productionData);
     } catch (error) {
