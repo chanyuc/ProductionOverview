@@ -13,7 +13,19 @@ const ProductionDataChart = () => {
 
   const options = {
     scales: {
+      x: {
+        grid: {
+          display: true,
+          color: 'rgba(0, 0, 0, 0.1)',
+          lineWidth: 0
+        }
+      },
       y: {
+        grid: {
+          display: true,
+          color: 'rgba(0, 0, 0, 0.1)',
+          lineWidth: 0
+        },
         min: -100,
         max: 100
       }

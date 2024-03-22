@@ -72,12 +72,20 @@ const useChartData = () => {
           return acc;
         }, {});
 
-        const datasets = Object.keys(groupedData).map(lineCode => ({
-          label: lineCode,
-          data: groupedData[lineCode].GAPData,
-          borderColor: getColors(),
-          fill: false
-        }));
+        const colors = [];
+        const datasets = Object.keys(groupedData).map((lineCode, index) => {
+          const color = getColors();
+          colors.push(color);
+          return {
+            label: lineCode,
+            data: groupedData[lineCode].GAPData,
+            borderColor: color,
+            backgroundColor: color,
+            fill: false,
+            pointRadius: 0,
+            pointHoverRadius: 12
+          };
+        });
 
         const newChartData = {
           labels: groupedData[Object.keys(groupedData)[0]].labels, 
