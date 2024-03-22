@@ -1,0 +1,22 @@
+.production-chart-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.88);
+}
+  
+.production-chart {
+    width: 100vw;
+    height: 90vh;
+}
+
+.production-graph {
+    width: 90vw !important;
+    height: 90vh !important;
+    margin: auto;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.text-color {
+    color: azure;
+}

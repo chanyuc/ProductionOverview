@@ -81,6 +81,7 @@ const useChartData = () => {
             data: groupedData[lineCode].GAPData,
             borderColor: color,
             backgroundColor: color,
+            
             fill: false,
             pointRadius: 0,
             pointHoverRadius: 12
