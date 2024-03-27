@@ -3,54 +3,12 @@ import useChartData from './useChartData';
 import { Line } from 'react-chartjs-2'; 
 import { Chart, registerables } from 'chart.js';
 import '../CSS/ProductionDataChart.css';
+import { options } from './chartOptions';
 Chart.register(...registerables);
 
 const ProductionDataChart = () => {
   const chartData = useChartData();
-
-  if (!chartData) {
-    return <div>Loading...</div>; 
-  }
-
-  const options = {
-    scales: {
-      x: {
-        grid: {
-          display: false,
-          color: 'azure'
-        },
-        ticks: {
-          color: 'azure'
-        }
-      },
-      y: {
-        grid: {
-          display: false,
-          color: 'azure'
-        },
-        ticks: {
-          color: 'azure'
-        },
-        min: -100,
-        max: 100
-      }
-    },
-    plugins: {
-      tooltip: {
-        enabled: true,
-        mode: 'index',
-        intersect: false,
-        position: 'nearest',
-        borderWidth: 5,
-        padding: 20,
-      },
-      legend: {
-        labels: {
-          color: 'azure'
-        }
-      }
-    }
-  };
+  if (!chartData) { return <div>Loading...</div>; }
 
   return (
     <div className="production-chart-container">

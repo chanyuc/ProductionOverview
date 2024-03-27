@@ -3,4 +3,44 @@
   height: 100vh;
   width: 100vw;
   display: flex;
+  background-color: rgba(0, 0, 0, 0.88);
+}
+
+.nav {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  height: 10vh;
+  top: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 3px solid #193d61;
+  background-color: #193d61;
+  border-radius: 27px;
+  width: 200px;
+  height: 25px;
+  margin: 12px 12px 0 12px;
+  color: azure;
+  font-family: "Gill Sans Extrabold", sans-serif;
+}
+
+a:link { 
+  text-decoration: none; 
+} 
+a:visited { 
+  text-decoration: none; 
+} 
+a:hover { 
+  text-decoration: none; 
+  border: 3px solid #375d83;
+  background-color: #375d83;
+  color: rgb(251, 255, 255);
+} 
+a:active { 
+  text-decoration: none; 
 }

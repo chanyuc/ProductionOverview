@@ -4,7 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const productionDataRoutes = require('./routes/productionDataRoutes')
-const ProductionData = require('./models/ProductionData');
+const receiveDataRoutes = require('./routes/receiveDataRoutes')
 const router = express.Router();
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -16,10 +16,11 @@ app.get('/', (req, res) => {
   res.json({ message: "Welcome to the backend server" });
 });
 
+app.use('/api', productionDataRoutes);
+app.use('/api/order', receiveDataRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-app.use('/api', productionDataRoutes);
 
 module.exports = router;
