@@ -1,7 +1,20 @@
 .production-chart-container {
     width: 100vw;
     height: 100vh;
+    
+    opacity: 0; /* Start with opacity 0 */
+    animation: fadeIn 3s forwards cubic-bezier(0.5, 1, 0.89, 1); /* Apply fade-in animation */
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Start opacity */
+    }
+    to {
+        opacity: 1; /* End opacity */
+    }
+}
+
   
 .production-chart {
     width: 100vw;

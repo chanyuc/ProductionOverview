@@ -19,10 +19,10 @@
   align-items: center;
   justify-content: center;
 
-  border: 3px solid #193d61;
-  background-color: #193d61;
-  border-radius: 27px;
-  width: 200px;
+  border-radius: 3px;
+  border-bottom: 3px solid azure;
+
+  width: 180px;
   height: 25px;
   margin: 12px 12px 0 12px;
   color: azure;
@@ -37,9 +37,8 @@ a:visited {
 } 
 a:hover { 
   text-decoration: none; 
-  border: 3px solid #375d83;
-  background-color: #375d83;
-  color: rgb(251, 255, 255);
+  border-bottom: 3px solid #bdbdbd;
+  color: #bdbdbd;
 } 
 a:active { 
   text-decoration: none; 
