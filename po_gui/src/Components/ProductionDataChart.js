@@ -6,6 +6,7 @@ import '../CSS/ProductionDataChart.css';
 import { options } from './chartOptions';
 Chart.register(...registerables);
 
+// (CY): Container for loading the Line Graph for the GAP data
 const ProductionDataChart = () => {
   const chartData = useChartData();
   if (!chartData) { return <div>Loading...</div>; }

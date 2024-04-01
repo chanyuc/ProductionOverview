@@ -5,6 +5,7 @@ import ProductionDataChart from './Components/ProductionDataChart';
 import ReceiveOrderChart from './Components/ReceiveOrderChart';
 import './App.css';
 
+// (CY): Routing to specific graph components
 const App = () => {
   return (
     <div className="App">

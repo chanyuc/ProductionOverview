@@ -1,3 +1,4 @@
+// (CY): Function to grab a color
 const getColors = (index) => {
     const pastelColors = [
       '#FF9999', // Light red
@@ -14,6 +15,6 @@ const getColors = (index) => {
   
     const color = pastelColors[index];
     return color;
-  };
+};
 
-  export default getColors;
+export default getColors;

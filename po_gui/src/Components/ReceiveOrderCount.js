@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import getColors from './colorUtils';
 
+// (CY): Receive Count order, API already has counted it per hour
 const useReceiveOrderCount = () => {
   const [chartData, setChartData] = useState(null);
 

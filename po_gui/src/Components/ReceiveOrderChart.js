@@ -8,6 +8,7 @@ import '../CSS/ProductionDataChart.css';
 import { options } from './chartOptions';
 Chart.register(...registerables);
 
+// (CY): Container for loading the Line Graph for the Order data
 const ReceiveOrderChart = () => {
   const chartData1 = ReceiveOrderCount();
   const chartData2 = ProductionHourly();

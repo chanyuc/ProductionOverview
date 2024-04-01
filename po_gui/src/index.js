@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from "react-router-dom";
 
+// (CY): BrowserRouter for internal react routing
 ReactDOM.render(
   <BrowserRouter>
     <App />

@@ -1,3 +1,4 @@
+// (CY): Function to view the chartbox
 export const options = {
     scales: {
       x: {

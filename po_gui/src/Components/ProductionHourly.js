@@ -3,6 +3,7 @@ import axios from 'axios';
 import getColors from './colorUtils';
 import { parseSaveTime, formatSaveTime } from './timeUtils';
 
+// (CY): Production GAP chart, but averaged out by hourly
 const ProductionHourly = () => {
   const [chartData, setChartData] = useState(null);
 
