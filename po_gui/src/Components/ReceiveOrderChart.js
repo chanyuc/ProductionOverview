@@ -34,7 +34,7 @@ const ReceiveOrderChart = () => {
   return (
     <div className="production-chart-container">
       <div className="production-chart">
-        <h2 className='text-color'>Receive Order Chart</h2>
+        <h2 className='text-color'>Receive Order Count</h2>
         <Line className='production-graph' data={multiLineData} options={options} />
       </div>
     </div>

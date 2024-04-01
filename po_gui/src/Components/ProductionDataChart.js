@@ -13,7 +13,7 @@ const ProductionDataChart = () => {
   return (
     <div className="production-chart-container">
       <div className="production-chart">
-        <h2 className='text-color'>Production Data Chart</h2>
+        <h2 className='text-color'>Production GAP Data</h2>
         <Line className='production-graph' data={chartData} options={options} />
       </div>
     </div>

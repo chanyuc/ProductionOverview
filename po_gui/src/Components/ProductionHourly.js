@@ -9,7 +9,7 @@ const ProductionHourly = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/production-data/');
+        const response = await axios.get('http://localhost:3001/api/prod/production-data/');
         const productionData = response.data.map(data => ({
           ...data,
           SaveTime: formatSaveTime(parseSaveTime(data.SaveTime))
@@ -47,10 +47,12 @@ const ProductionHourly = () => {
             .sort()
             .map(hour => `${hour}:00`);
 
-        const colors = [];
-        const datasets = Object.keys(groupedData).map(lineCode => {
-            const color = getColors();
-            colors.push(color);
+        let colorIndex = 0;
+        const datasets = Object.keys(groupedData)
+          .sort()
+          .map(lineCode => {
+            const color = getColors(colorIndex);
+            colorIndex = (colorIndex + 1) % 10;
             return {
                 label: lineCode,
                 data: Object.keys(groupedData[lineCode])

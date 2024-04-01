@@ -1,6 +1,4 @@
-let colorIndex = 0;
-
-const getColors = () => {
+const getColors = (index) => {
     const pastelColors = [
       '#FF9999', // Light red
       '#99CCFF', // Light blue
@@ -14,8 +12,7 @@ const getColors = () => {
       '#FFD699', // Light peach
     ];
   
-    const color = pastelColors[colorIndex];
-    colorIndex = (colorIndex + 1) % pastelColors.length;
+    const color = pastelColors[index];
     return color;
   };
 

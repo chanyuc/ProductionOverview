@@ -16,7 +16,8 @@ app.get('/', (req, res) => {
   res.json({ message: "Welcome to the backend server" });
 });
 
-app.use('/api', productionDataRoutes);
+// (CY): API routes
+app.use('/api/prod', productionDataRoutes);
 app.use('/api/order', receiveDataRoutes);
 
 app.listen(PORT, () => {
