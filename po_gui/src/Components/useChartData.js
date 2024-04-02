@@ -4,13 +4,24 @@ import getColors from './colorUtils';
 import { parseSaveTime, formatSaveTime } from './timeUtils';
 
 // (CY): Production GAP chart, every 5 min
-const useChartData = () => {
+const useChartData = (pageNumber) => {
   const [chartData, setChartData] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
+  const formatDate = (dateString) => {
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const day = dateString.substring(6, 8);
+    return `${year}-${month}-${day}`;
+  };
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/api/prod/production-data/');
-      const productionData = response.data.map(data => ({
+      const response = await axios.get(`http://localhost:3001/api/prod/production-data/pagination?page=${pageNumber}&pageSize=1001`);
+      const { data, totalItems } = response.data;
+      
+      const productionData = data.map(data => ({
         ...data,
         SaveTime: formatSaveTime(parseSaveTime(data.SaveTime))
       }));
@@ -30,7 +41,9 @@ const useChartData = () => {
       }, {});
 
       let colorIndex = 0;
-      const datasets = Object.keys(groupedData).map((lineCode, index) => {
+      const datasets = Object.keys(groupedData)
+        .sort()
+        .map((lineCode, index) => {
         const color = getColors(colorIndex);
         colorIndex = (colorIndex + 1) % 10;
         return {
@@ -38,7 +51,6 @@ const useChartData = () => {
           data: groupedData[lineCode].GAPData,
           borderColor: color,
           backgroundColor: color,
-          
           fill: origin,
           pointRadius: 0,
           pointHoverRadius: 12
@@ -50,6 +62,8 @@ const useChartData = () => {
         datasets: datasets
       };
 
+      setStartDate(formatDate(data[data.length - 1].SaveTime));
+      setEndDate(formatDate(data[0].SaveTime));
       setChartData(newChartData);
     } catch (error) {
       console.error('Error fetching production data:', error);
@@ -58,9 +72,9 @@ const useChartData = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [pageNumber]);
 
-  return chartData;
+  return { chartData, startDate, endDate };
 };
 
 export default useChartData;

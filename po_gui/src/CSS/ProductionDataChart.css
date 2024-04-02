@@ -14,7 +14,6 @@
         opacity: 1; /* End opacity */
     }
 }
-
   
 .production-chart {
     width: 100vw;
@@ -29,6 +28,14 @@
     margin-bottom: 0 !important;
 }
 
-.text-color {
+.text-color, .p-text {
     color: azure;
+}
+
+.date-range {
+    display: flex;
+    justify-content: start;
+    height: 10px;
+    margin-left: 5%;
+    font-family: "Gill Sans Extrabold", sans-serif;
 }
