@@ -25,7 +25,7 @@ const App = () => {
       <Routes className="route">
         <Route exact path="/ProductionOverview/ProductionData" element={<ProductionDataChart pageNumber={pageNumber} />}/>
         <Route path="/ProductionOverview" element={<ProductionDataChart pageNumber={pageNumber} />}/>
-        <Route path="/ProductionOverview/RecvOrderCount" element={<ReceiveOrderChart />} />
+        <Route path="/ProductionOverview/RecvOrderCount" element={<ReceiveOrderChart pageNumber={pageNumber} />} />
       </Routes>
 
       <div className="nav-container">

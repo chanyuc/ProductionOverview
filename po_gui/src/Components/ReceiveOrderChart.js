@@ -9,9 +9,9 @@ import { options } from './chartOptions';
 Chart.register(...registerables);
 
 // (CY): Container for loading the Line Graph for the Order data
-const ReceiveOrderChart = () => {
-  const chartData1 = ReceiveOrderCount();
-  const { chartData2, startDate, endDate } = ProductionHourly();
+const ReceiveOrderChart = ({ pageNumber }) => {
+  const chartData1 = ReceiveOrderCount(pageNumber);
+  const { chartData2, startDate, endDate } = ProductionHourly(pageNumber);
   if (!chartData1 || !chartData2) { return <div>Loading...</div>; }
 
   const RecentLabels = chartData1.labels;

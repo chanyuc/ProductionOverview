@@ -3,9 +3,20 @@ const router = express.Router();
 const sequelize = require('../database');
 const ReceiveData = require('../models/ReceiveData');
 
+const DEFAULT_PAGE_SIZE = 13;
+const MAX_PAGE_SIZE = 1001;
+function calculateOffset(page, pageSize) {
+    return (page - 1) * pageSize;
+}
+
 router.get('/receive-data/pagination', async (req, res) => {
     try {
-        const receiveData = await ReceiveData.findAll({
+        const page = parseInt(req.query.page) || 1;
+        let pageSize = parseInt(req.query.pageSize) || DEFAULT_PAGE_SIZE;
+        pageSize = Math.min(pageSize, MAX_PAGE_SIZE);
+
+        const offset = calculateOffset(page, pageSize);
+        const receiveData = await ReceiveData.findAndCountAll({
             attributes: [
                 [sequelize.literal("SUBSTRING(CarDate, 0, 5) + '-' + SUBSTRING(CarDate, 5, 2) + '-' + SUBSTRING(CarDate, 7, 2) + ' ' + SUBSTRING(CarDate, 9, 2) + ':00'"), 'DateTime'],
                 [sequelize.fn('COUNT', sequelize.col('*')), 'OrderCount'],
@@ -14,10 +25,20 @@ router.get('/receive-data/pagination', async (req, res) => {
                 sequelize.literal("SUBSTRING(CarDate, 0, 5) + '-' + SUBSTRING(CarDate, 5, 2) + '-' + SUBSTRING(CarDate, 7, 2) + ' ' + SUBSTRING(CarDate, 9, 2) + ':00'")
             ],
             order: [[sequelize.literal('DateTime'), 'DESC']],
-            limit: 12,
+            limit: pageSize,
+            offset: offset,
             raw: true
         });
-        res.json(receiveData);
+        
+        const nextPage = page + 1;
+
+        res.json({ 
+            data: receiveData.rows,
+            totalItems: receiveData.count,
+            currentPage: page,
+            pageSize: pageSize,
+            nextPage: nextPage,
+        });
     } catch (error) {
         console.error('Error fetching order data:', error);
         res.status(500).json({ error: 'Internal server error' });
