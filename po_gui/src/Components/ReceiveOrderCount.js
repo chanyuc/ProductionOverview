@@ -4,18 +4,19 @@ import getColors from './colorUtils';
 
 // (CY): Receive Count order, API already has counted it per hour
 const useReceiveOrderCount = () => {
-  const [chartData, setChartData] = useState(null);
+  const [chartData1, setChartData1] = useState(null);
 
   const fetchData = async () => {
     try {
       const response = await axios.get('http://localhost:3001/api/order/receive-data/average');
       const data = response.data;
+      const reversedData = data.reverse();
 
-      const labels = data.map(entry => {
-        const hour = entry.DateTime.split(' ')[1].split(':')[0];
-        return `${hour}:00`; 
-      });      
-      const orderCounts = data.map(entry => entry.OrderCount);
+      const labels = reversedData.map(entry => {
+        const hour = entry.DateTime.split(' ')[1];
+        return `${hour}`; 
+      });
+      const orderCounts = reversedData.map(entry => entry.OrderCount);
       const color = getColors(8);
 
       const newChartData = {
@@ -31,7 +32,7 @@ const useReceiveOrderCount = () => {
         }]
       };
 
-      setChartData(newChartData);
+      setChartData1(newChartData);
     } catch (error) {
       console.error('Error fetching car orders data:', error);
     }
@@ -41,7 +42,7 @@ const useReceiveOrderCount = () => {
     fetchData();
   }, []);
 
-  return chartData;
+  return chartData1;
 };
 
 export default useReceiveOrderCount;

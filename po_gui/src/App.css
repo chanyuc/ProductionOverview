@@ -48,7 +48,7 @@ a:link {
 a:visited { 
   text-decoration: none; 
 } 
-a:hover { 
+a:hover, .nav-button:hover { 
   text-decoration: none; 
   border-bottom: 3px solid #bdbdbd;
   color: #bdbdbd;

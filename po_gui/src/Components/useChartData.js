@@ -1,20 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import getColors from './colorUtils';
-import { parseSaveTime, formatSaveTime } from './timeUtils';
+import { formatDate, parseSaveTime, formatSaveTime } from './timeUtils';
 
 // (CY): Production GAP chart, every 5 min
 const useChartData = (pageNumber) => {
   const [chartData, setChartData] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-
-  const formatDate = (dateString) => {
-    const year = dateString.substring(0, 4);
-    const month = dateString.substring(4, 6);
-    const day = dateString.substring(6, 8);
-    return `${year}-${month}-${day}`;
-  };
 
   const fetchData = async () => {
     try {
@@ -25,9 +18,7 @@ const useChartData = (pageNumber) => {
         ...data,
         SaveTime: formatSaveTime(parseSaveTime(data.SaveTime))
       }));
-
       const reversedData = productionData.reverse();
-
       const groupedData = reversedData.reduce((acc, cur) => {
         if (!acc[cur.LineCode]) {
           acc[cur.LineCode] = {

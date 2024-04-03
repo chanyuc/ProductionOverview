@@ -77,26 +77,26 @@ router.get('/production-data/recent', async (req, res) => {
 router.get('/production-data/average', async (req, res) => {
     try {
         const endTime = moment();
-        const startTime = moment().subtract(24, 'hours');
+        const startTime = moment().subtract(12, 'hours');
 
         const productionData = await ProductionData.findAll({
             attributes: [
                 [sequelize.literal("LineCode"), 'LineCode'],
-                [sequelize.literal("SUBSTRING(SaveTime, 9, 2) + ':00'"), 'HourOfDay'],
+                [sequelize.literal("SUBSTRING(SaveTime, 0, 5) + '-' + SUBSTRING(SaveTime, 5, 2) + '-' + SUBSTRING(SaveTime, 7, 2) + ' ' + SUBSTRING(SaveTime, 9, 2) + ':00'"), 'DateTime'],
                 [sequelize.fn('AVG', sequelize.col('GAP')), 'AverageGAP']
             ],
             where: {
                 SaveTime: {
-                    [Op.between]: [startTime.format('YYYY-MM-DD HH:mm:ss'), endTime.format('YYYY-MM-DD HH:mm:ss')]
+                    [Op.between]: [startTime.format('YYYYMMDDHHmmss'), endTime.format('YYYYMMDDHHmmss')]
                 }
             },
             group: [
                 sequelize.literal("LineCode"),
-                sequelize.literal("SUBSTRING(SaveTime, 9, 2)")
+                sequelize.literal("SUBSTRING(SaveTime, 0, 5) + '-' + SUBSTRING(SaveTime, 5, 2) + '-' + SUBSTRING(SaveTime, 7, 2) + ' ' + SUBSTRING(SaveTime, 9, 2) + ':00'")
             ],
             order: [
                 sequelize.literal('LineCode ASC'),
-                sequelize.literal('HourOfDay ASC')
+                sequelize.literal('DateTime DESC')
             ],
             raw: true
         });
@@ -106,6 +106,7 @@ router.get('/production-data/average', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 
 module.exports = router;

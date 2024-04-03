@@ -11,17 +11,15 @@ Chart.register(...registerables);
 // (CY): Container for loading the Line Graph for the Order data
 const ReceiveOrderChart = () => {
   const chartData1 = ReceiveOrderCount();
-  const chartData2 = ProductionHourly();
+  const { chartData2, startDate, endDate } = ProductionHourly();
   if (!chartData1 || !chartData2) { return <div>Loading...</div>; }
 
-  const RecentLabels = chartData1.labels.slice(-12);
+  const RecentLabels = chartData1.labels;
   const RecentData1 = chartData1.datasets.map(dataset => ({
-      ...dataset,
-      data: dataset.data.slice(-12)
+      ...dataset
   }));
   const RecentData2 = chartData2.datasets.map(dataset => ({
-      ...dataset,
-      data: dataset.data.slice(-12)
+      ...dataset
   }));
 
   const multiLineData = {
@@ -36,6 +34,9 @@ const ReceiveOrderChart = () => {
     <div className="production-chart-container">
       <div className="production-chart">
         <h2 className='text-color'>Receive Order Count</h2>
+        <div className="date-range">
+          <p className='p-text'>Date: {startDate} - {endDate}</p>
+        </div>
         <Line className='production-graph' data={multiLineData} options={options} />
       </div>
     </div>
