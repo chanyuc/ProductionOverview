@@ -62,7 +62,15 @@ const useChartData = (pageNumber) => {
   };
 
   useEffect(() => {
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 5 * 60 * 1000);
+
     fetchData();
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [pageNumber]);
 
   return { chartData, startDate, endDate };

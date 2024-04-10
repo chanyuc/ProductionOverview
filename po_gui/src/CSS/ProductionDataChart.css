@@ -34,7 +34,7 @@
 
 .date-range {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     height: 10px;
     margin-left: 5%;
     font-family: "Gill Sans Extrabold", sans-serif;

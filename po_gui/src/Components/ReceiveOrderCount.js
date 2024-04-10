@@ -8,10 +8,7 @@ const useReceiveOrderCount = (pageNumber) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/order/receive-data/pagination`);
-
-      // (CY): Pagination works, but not using
-      // const response = await axios.get(`http://localhost:3001/api/order/receive-data/pagination?page=${pageNumber}&pageSize=13`);
+      const response = await axios.get(`http://localhost:3001/api/order/receive-data/pagination?page=${pageNumber}&pageSize=13`);
       const { data, currentPage, pageSize } = response.data;
       const reversedData = data.reverse();
 

@@ -32,6 +32,8 @@ export const options = {
         padding: 20,
       },
       legend: {
+        position: 'top',
+        align: 'end',
         labels: {
           color: 'azure'
         }
