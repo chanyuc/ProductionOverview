@@ -3,13 +3,13 @@ import axios from 'axios';
 import getColors from './colorUtils';
 
 // (CY): Receive Count order, API already has counted it per hour
-const useReceiveOrderCount = (pageNumber) => {
+const useReceiveOrderCount = () => {
   const [chartData1, setChartData1] = useState(null);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/order/receive-data/pagination?page=${pageNumber}&pageSize=13`);
-      const { data, currentPage, pageSize } = response.data;
+      const response = await axios.get('http://localhost:3001/api/order/receive-data/average');
+      const data = response.data;
       const reversedData = data.reverse();
 
       const labels = reversedData.map(entry => {
@@ -40,7 +40,7 @@ const useReceiveOrderCount = (pageNumber) => {
 
   useEffect(() => {
     fetchData();
-  }, [pageNumber]);
+  }, []);
 
   return chartData1;
 };

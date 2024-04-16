@@ -3,20 +3,17 @@ import axios from 'axios';
 import getColors from './colorUtils';
 import { formatDate2 } from './timeUtils';
 
-// NOT IN USE
 // (CY): Production GAP chart, but averaged out by hourly
-const ProductionHourly = (pageNumber) => {
+const ProductionHourly = () => {
   const [chartData2, setChartData2] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/prod/production-data/avg/pagination`);
-
-      // (CY): Pagination is not working
-      // const response = await axios.get(`http://localhost:3001/api/prod/production-data/avg/pagination?page=${pageNumber}&pageSize=91`);
-      const { data, currentPage, pageSize } = response.data;
+      const response = await axios.get('http://localhost:3001/api/prod/production-data/average');
+      const data = response.data;
+  
       const productionData = data.map(item => ({
         ...item,
         DateTime: item.DateTime
@@ -90,7 +87,7 @@ const ProductionHourly = (pageNumber) => {
 
   useEffect(() => {
     fetchData();
-  }, [pageNumber]);
+  }, []);
 
   return { chartData2, startDate, endDate };
 };
