@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ProductionOverview/static/css/main.373958f6.css",
+    "main.js": "/ProductionOverview/static/js/main.6cf23f22.js",
+    "index.html": "/ProductionOverview/index.html",
+    "main.373958f6.css.map": "/ProductionOverview/static/css/main.373958f6.css.map",
+    "main.6cf23f22.js.map": "/ProductionOverview/static/js/main.6cf23f22.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.373958f6.css",
+    "static/js/main.6cf23f22.js"
+  ]
+}
